@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.myself.multiknowledgepoint">
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 用来测试多进程 -->
+        <!--
+            冒号“：”的含义是在当前进程名前面附上当前的包名。那么MultiProcess的完整进程名为“com.myself.multiknowledgepoint:other_process”。
+            我们也可以设置 android:process=”com.myself.multiknowledgepoint.other_process”，这是一种完整的命名方式。
+
+            这两种命名也是有区别的，如果被设置的进程名是以“：”开头的，则这个新的进程对于这个应用来说是私有的，
+                它被需要或者这个服务需要在新进程中运行的时候，这个新进程将会被创建。
+            如果这个进程的名字是以小写字符开头的，则这个服务将运行在一个以这个名字命名的全局的进程中，
+                当然前提是它有相应的权限。这将允许在不同应用中的各种组件可以共享一个进程，从而减少资源的占用。
+        -->
+        <service
+            android:name=".MultiProcessService"
+            android:process=":other_process" />
+    </application>
+
+</manifest>
